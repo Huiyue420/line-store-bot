@@ -17,12 +17,15 @@ def run_with_ngrok():
         
         # 建立 HTTPS 通道
         http_tunnel = ngrok.connect(5000)
-        public_url = http_tunnel.public_url
+        ngrok_url = http_tunnel.public_url
+        
         print("\n=== 開發伺服器已啟動 ===")
         print(f"本地網址：http://127.0.0.1:5000")
-        print(f"公開網址：{public_url}")
+        print(f"公開網址：{http_tunnel}")
+        
         print(f"\n請在 LINE Developers Console 設定以下 Webhook URL：")
-        print(f"{public_url}/callback")
+        print(f"{ngrok_url}/callback")
+        
         print("\n提醒：")
         print("1. 每次重新啟動 ngrok，網址都會改變")
         print("2. 請確保已在 LINE Developers Console 中：")
@@ -30,6 +33,7 @@ def run_with_ngrok():
         print("   - 啟用 Webhook")
         print("   - 關閉自動回覆訊息")
         print("   - 關閉歡迎訊息")
+        
         print("\n按 Ctrl+C 停止伺服器")
         
         # 啟動 Flask 應用
